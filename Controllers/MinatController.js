@@ -26,7 +26,7 @@ async function tampil(req, res){
         const detail = await MinatService.tampil(req);
         
         let find = detail
-        if(typeof data == undefined){
+        if(typeof find == undefined){
             return response(res, 400, false ,'Data not found');
         }else{
             return response(res, 200, true ,'Success Send Request To Service', find);
@@ -36,5 +36,18 @@ async function tampil(req, res){
     }
 }
 
+async function update(req,res){
+    try {
+        const updateData = await MinatService.update(req);
+        let update = updateData
+        if(typeof update == undefined){
+            return response(res, 200, true, "Succes Send Request To Service", update )
+        }
+    } catch (error) {
+        return response(res, 400, false, "Data Not Update", error)   
+    }
+}
+
+module.exports.update = update
 module.exports.tampil = tampil
 module.exports.create = create 

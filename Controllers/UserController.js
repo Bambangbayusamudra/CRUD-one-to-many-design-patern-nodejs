@@ -4,8 +4,8 @@ var response = require('../response')
 
 async function UserCreate (req, res){
 	try {
-		const requestUser = await UserService.UserCreate(req, res);
-		console.log(requestUser)
+		const requestUser = await UserService.UserCreate(req);
+		// console.log(requestUser)
 		let reqData = requestUser
         if (typeof reqData == undefined){
             return response(res, 400, false ,'Data not found');
@@ -18,7 +18,22 @@ async function UserCreate (req, res){
 	}
 }
 
+async function tampil(req, res){
+	try {
+		const detail = await UserService.tampil(req);
+		// console.log("detail")
+		// console.log(detail)
+		let look = detail
+		if(typeof look == undefined){
+			return(res, 200, true, "Data Valid", look)
+		}
+	} catch (error) {
+		return (res, 400, false,"Data Error",error )
+	}
+}
+
 module.exports.UserCreate = UserCreate
+module.exports.tampil = tampil
 
 // exports.products = (req, res, next) => {
 // 	ProductService.fetchProducts({id: '1'})

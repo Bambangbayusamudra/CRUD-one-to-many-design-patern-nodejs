@@ -1,15 +1,15 @@
 /*** Table Name ***/
-var tableName = 'siswa';
+var tableName = 'kelas';
 
 /*** Same for all Models */
 const Base = require('./Base');
-class Siswa extends Base.Model {}
+class Kelas extends Base.Model {}
 const sequelize = Base.sequelize;
 const DataTypes = Base.Sequelize;
 
 /*** Model Structure Define  Here */
 function initialize(sequelize,DataTypes){
-    return Siswa.init({
+    return Kelas.init({
 		id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
@@ -17,16 +17,17 @@ function initialize(sequelize,DataTypes){
 			autoIncrement: true,
 			field: 'id'
 		},
-		nama: {
-			type: DataTypes.STRING(100),
+		siswaid: {
+			type: DataTypes.INTEGER(11),
 			allowNull: false,
-			field: 'nama'
+			field: 'siswaid'
 		},
-		nis: {
-			type: DataTypes.STRING(100),
-			allowNull: false,
-			field: 'nis'
+		jenis_kelas: {
+			type: DataTypes.STRING(45),
+			allowNull: true,
+			field: 'jenis_kelas'
 		}
+
     }, {
         sequelize,
     freezeTableName: true,
@@ -35,6 +36,6 @@ function initialize(sequelize,DataTypes){
     });
 }
 
-var SiswaModel = initialize(sequelize,DataTypes);
+var KelasModel = initialize(sequelize,DataTypes);
 /*** exported for usage */
-module.exports = SiswaModel;
+module.exports = KelasModel;

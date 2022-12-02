@@ -11,7 +11,7 @@ async function create(req, res) {
         if (typeof reqData == undefined){
             return response(res, 400, false ,'Data not found');
         }else{
-            return response(res, 200, true ,'Success Send Request To Service', reqData.dataValues);
+            return response(res, 200, true ,'Success Send Request To Service', reqData);
         }
 
 	}catch (error) {
@@ -23,7 +23,7 @@ async function create(req, res) {
 async function tampil(req, res) {
 	try {
 		const request = await MapelService.tampil(req, res);
-        console.log(request);
+        // console.log(request);
         if (typeof request == undefined){
             return response(res, 400, false ,'Data not found');
         }else{
@@ -38,11 +38,11 @@ async function tampil(req, res) {
 
 async function destroy(req, res) {
 	try {
-		const request = await MapelService.deleteMapel(req, res);
+		const request = await MapelService.destroy(req, res);
         if (typeof request == undefined){
             return response(res, 400, false ,'Delete not found');
         }else{
-            return response(res, 200, true ,'Success Send Request To Service');
+            return response(res, 200, true ,'Success Delete ', request.dataValues);
         }
 
 	}catch (error) {
@@ -51,13 +51,14 @@ async function destroy(req, res) {
 };
 
 async function update(req, res){
+    console.log(req)
     try {
         // console.log(req)
 		const request = await MapelService.update(req);
         if (typeof request == undefined){
             return response(res, 400, false ,'Updated Failed');
         }else{
-            return response(res, 200, true ,'Success Update Mapel');
+            return response(res, 200, true ,'Success Update Mapel', request);
         }
 
 	}catch (error) {

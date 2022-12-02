@@ -68,18 +68,6 @@ async function update(params , req) {
         return "error";
     })
 }
-async function deleteSiswa(params , req) {
-    return this.getModel().destroy({
-        where: {
-          id: params.id
-        }
-      }).then(Result => {
-        return Result;
-    }).catch(err => {
-        console.error("Unable to Get data", err);
-        return "error";
-    })
-}
 
 async function destroy(params , req) {
     return this.getModel().destroy({
@@ -111,5 +99,4 @@ module.exports. updatemap = updatemap;
 module.exports. update = update;
 module.exports. findAll = findAll;
 module.exports. insert = insert;
-module.exports. deleteSiswa = deleteSiswa;
 module.exports. destroy = destroy;

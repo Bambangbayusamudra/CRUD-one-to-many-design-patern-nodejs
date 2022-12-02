@@ -23,6 +23,8 @@ var MapelController = require('../Controllers/MapelController');
 var MinatController = require('../Controllers/MinatController');
 var ProductController = require('../Controllers/ProductController');
 var CategoryController = require('../Controllers/CategoryController');
+var KelasController = require('../Controllers/KelasController');
+var GuruController = require('../Controllers/GuruController');
 
 /**
 *** Routes
@@ -44,7 +46,7 @@ router.all('/list', function(req, res, next) {
 // router.get('/user/profile', UserController.profile);
 
 router.post('/create', SiswaController.create);
-router.get('/tampil', SiswaController.tampil);
+router.get('/tampil/:id', SiswaController.tampil);
 router.delete('/delete/:id', SiswaController.deleteSiswa);
 router.put('/update/:id', SiswaController.update);
 
@@ -55,10 +57,18 @@ router.put('/updatemap/:id', MapelController.update);
 
 router.post('/createminat', MinatController.create);
 router.get('/tampilminat/:id', MinatController.tampil);
+router.put('/update/:id', MinatController.update);
 
 router.post('/users', UserController.UserCreate);
+router.get('/tampil', UserController.tampil);
+
 router.post('/prod', ProductController.create);
 router.post('/category', CategoryController.create);
 
+router.post('/class', KelasController.create);
+router.get('/tampilkelas/:id', KelasController.tampil);
+
+router.post('/guru', GuruController.create);
+router.get('/tampilguru', GuruController.tampil);
 
 module.exports = router;

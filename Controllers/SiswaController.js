@@ -23,7 +23,7 @@ async function create(req, res) {
     try {
 		const request = await SiswaService.tampil(req);
         // console.log("==========request===========")
-        // console.log(request.dataValues)
+        console.log(request)
         let reqData = request
         if (typeof reqData == undefined){
             return response(res, 400, false ,'Data not found');
@@ -39,12 +39,12 @@ async function create(req, res) {
 }
  async function update(req, res){
     try {
-        console.log(req)
+        // console.log(req)
 		const request = await SiswaService.update(req);
         if (typeof request == undefined){
             return response(res, 400, false ,'Updated Failed');
         }else{
-            return response(res, 200, true ,'Success Update Siswa');
+            return response(res, 200, true ,'Success Update Siswa', request.dataValues);
         }
 
 	}catch (error) {
@@ -56,12 +56,12 @@ async function create(req, res) {
 
 async function deleteSiswa(req, res){
     try {
-        const request = await SiswaService.deleteSiswa(req);
+        const request = await SiswaService.destroy(req);
         console.log(request)
         if (typeof request == undefined){
             return response(res, 400, false ,'Delete Failed');
         }else{
-            return response(res, 200, true ,'Success Delete Siswa');
+            return response(res, 200, true ,'Success Delete Siswa' ,request.dataValues);
         }
 
 	}catch (error) {

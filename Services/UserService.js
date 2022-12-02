@@ -10,19 +10,33 @@ const UserCreate  = async (req, res) =>{
     try {
         const reqbody = req.body;
 
+        let payload = {
+
+            name : reqbody.name,
+            email : reqbody.email,
+            password : reqbody.password
+        }
+
         var UserRepository = require('../Repositories/UserRepository')
-        let request = await UserRepository.insert({
-             name : reqbody.name,
-             email : reqbody.email,
-             password : reqbody.password
-         });
+        let request = await UserRepository.insert(payload);
          return (res, 200, true, "Data berhasil di tambahkan",request)
     } catch (error) {
         return (res, 400, true, "Data Invalid", error);
     }
 }
 
+const tampil  = async (req, res) =>{
+    try {
+        var UserRepository = require('../Repositories/UserRepository')
+        // const id = req.params
+        let response = await UserRepository.findAll();
+        return response;
+    } catch (error) {
+        return error;
+    }
+}
 
+module.exports.tampil = tampil
 module.exports.UserCreate = UserCreate
 
 // module.exports.fetchUser = (id) => {

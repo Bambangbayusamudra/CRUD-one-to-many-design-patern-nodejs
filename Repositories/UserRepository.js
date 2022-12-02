@@ -17,5 +17,6 @@ async function insert(req) {
         return "error";
     })
 }
+
 module.exports.insert = insert;
 module.exports = BaseRepository;

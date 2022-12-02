@@ -1,7 +1,3 @@
-// var MinatModel = require('../Models/Minat');
-// var MapelModel = require('../Models/Mapel');
-// var SiswaModel = require('../Models/Siswa');;
-
 const MinatModel = require('../Models/Minat');
 const SiswaModel = require('../Models/Siswa');
 const MapelModel = require('../Models/Mapel')
@@ -10,26 +6,21 @@ async function create(req, res, id){
 
     try {
         const reqbody = req.body;
-        // console.log(reqbody)
         
-        const MinatRepository = require('../Repositories/MinatRepository');
-        let request = await MinatRepository.insert({
+        let payload = {
             mapelid : reqbody.mapelid,
             siswaid : reqbody.siswaid
-        });
+        }
+
+        const MinatRepository = require('../Repositories/MinatRepository');
+        let request = await MinatRepository.insert(payload);
         let reqData = request
         if (typeof reqData == null){
             return (res, 400, false ,'Data not found');
         }else{
             // let fecthAll = MinatRepository.findEndpoint(reqbody.siswaid, reqbody.mapelid);
-            console.log(fecthAll)
-            return (res, 200, true ,'Success Send reqData To Service', reqData);
+            return reqData;
         }
-        // SiswaModel.belongsToMany(MinatModel, {foreignKey: 'id',sourceKey:'siswaid'});//correct and working
-        // SiswaModel.hasMany(MinatModel, {foreignKey: 'siswaid',sourceKey:'id'});//correct and working
-        // MapelModel.hasMany(MinatModel, {foreignKey: 'mapelid',sourceKey:'id'});//correct and working
-        // return MinatRepository.fetchIncluded(id,[MinatModel], request);
-        // return (res, 200, true, "Data berhasil di tambahkan",request)
 
     } catch (error) {
         // console.log("error");
@@ -39,23 +30,31 @@ async function create(req, res, id){
 }
 
 async function tampil(req){
-    // const reqbody = req.body
-    // console.log(reqbody)
     try {
         const MinatRepository = require('../Repositories/MinatRepository');
         const id = req.params
-
-
-
-        console.log(id)
+        // console.log(id)
         let find = await MinatRepository.findEndpoint(id)
-        // let response = await MinatRepository.findAll();
-        // console.log('response')
         return find;
     } catch (error) {
+        console.log(error)
         return error;
     }
 }
 
+async function update(req){
+    try {
+        let reqbody = req.body
+        let params = req.params
+        
+        const MinatRepository = require('../Repositories/MapelRepository')
+        const response = await MinatRepository.update(params,reqbody)
+        return response;
+    } catch (error) {
+        
+    }
+}
+
+module.exports.update = update
 module.exports.tampil = tampil
 module.exports.create = create

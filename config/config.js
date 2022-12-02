@@ -10,7 +10,7 @@ var config = {
 		host: 'localhost',
 		username: 'root',
 		password: '',
-		database: 'relation'
+		database: 'relasi'
 	}
 }
 

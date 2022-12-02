@@ -6,13 +6,12 @@ async function create(req, res, id){
     try {
         const reqbody = req.body;
         // console.log(reqbody)
+        let payload = {
+            jenis_mapel : reqbody.jenis_mapel
+        };
 
         const MapelRepository = require('../Repositories/MapelRepository');
-        let request = await MapelRepository.insert({
-            jenis_mapel : reqbody.jenis_mapel
-        });
-        // MapelModel.hasOne(MinatModel, {foreignKey: 'mapelid',sourceKey: 'id'});
-        // return MapelRepository.fetchIncluded(id,[ProductModel], request);
+        let request = await MapelRepository.insert(payload);
         return (res, 200, true, "Data berhasil di tambahkan", request)
 
     } catch (error) {
@@ -28,7 +27,7 @@ async function tampil(req, res){
 
         const MapelModel = require('../Repositories/MapelRepository');
        let response = await MapelModel.findAll();
-        return (res, 200, true, "Data berhasil cari" , response[0])
+        return (res, 200, true, "Data berhasil cari" , response)
 
     } catch (error) {
         console.log(error);
@@ -43,7 +42,7 @@ async function destroy(req, res){
 
         const MapelModel = require('../Repositories/MapelRepository');
        let response = await MapelModel.destroy(params, reqbody);
-        return (res, 200, true, "Data berhasil cari",response[0])
+        return (res, 200, true, "Data berhasil cari",response)
 
     } catch (error) {
         console.log(error);
@@ -57,7 +56,7 @@ async function update(req, res){
         let params = req.params
         const MapelModel = require('../Repositories/MapelRepository');
         let response = await MapelModel.updatemap(params, reqbody);
-        return (res, 200, true, "Data berhasil Dilihat", response[0])
+        return (res, 200, true, "Data berhasil Dilihat", response)
     } catch (error) {
         return (res, 400, "Data invalid",error);
     }

@@ -22,10 +22,14 @@ MinatRepository.setModel(MinatModel);
 function findEndpoint (id) {
     MinatRepository.setModel(MinatModel);
     console.log(">>>>"+MinatRepository.getModel()) 
-    MinatModel.hasMany(SiswaModel,{foreignKey: 'id', sourceKey: 'siswaid'});
-    MinatModel.hasMany(MapelModel,{foreignKey: 'id', sourceKey: 'mapelid'});
-    MinatModel.belongsTo(MapelModel);
-
+    MinatModel.hasOne(SiswaModel,{foreignKey: 'id', sourceKey: 'siswaid'});
+    SiswaModel.belongsTo(MinatModel,{foreignKey: 'id', sourceKey: 'siswaid'});
+    
+    MinatModel.hasOne(MapelModel,{foreignKey: 'id', sourceKey: 'mapelid'});
+    MapelModel.belongsTo(MinatModel,{foreignKey: 'id', sourceKey: 'mapelid'});
+    
+    // MinatModel.hasOne(MapelModel,{foreignKey: 'id', sourceKey: 'mapelid'});
+    // MinatModel.hasOne(SiswaModel,{foreignKey: 'id', sourceKey: 'siswaid'});
     return MinatRepository.fetchIncluded("",[SiswaModel, MapelModel]);
 //         {
 //             model: MinatModel,
@@ -44,6 +48,7 @@ async function findAll() {
         return "error";
     })
 }
+
 
 module.exports.findAll = findAll
 module.exports.findEndpoint = findEndpoint
